@@ -82,10 +82,8 @@ public class CalculateAverage_diana {
 
     private static Map<String, StationStats> processChunk(FileChannel channel, long start, long end) throws IOException {
         var statsMap = new HashMap<String, StationStats>();
-        // Кожен потік мапує свою частину файлу в пам'ять
         MappedByteBuffer buffer = channel.map(FileChannel.MapMode.READ_ONLY, start, end - start);
 
-        // Якщо це не початок файлу, пропускаємо залишок попереднього рядка
         if (start > 0) {
             while (buffer.hasRemaining() && buffer.get() != '\n')
                 ;
@@ -103,7 +101,6 @@ public class CalculateAverage_diana {
 
             String name = new String(nameBuffer, 0, namePos, java.nio.charset.StandardCharsets.UTF_8);
 
-            // Швидкий парсинг числа (температури)
             double val = 0;
             boolean negative = false;
             while (buffer.hasRemaining()) {
@@ -113,7 +110,7 @@ public class CalculateAverage_diana {
                 else if (b >= '0' && b <= '9')
                     val = val * 10 + (b - '0');
                 else if (b == '.') {
-                    /* ігноруємо крапку, потім поділимо на 10 */ }
+                     }
                 else if (b == '\n' || b == '\r')
                     break;
             }
