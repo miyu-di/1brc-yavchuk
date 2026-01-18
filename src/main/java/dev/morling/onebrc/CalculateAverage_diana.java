@@ -110,7 +110,7 @@ public class CalculateAverage_diana {
                 else if (b >= '0' && b <= '9')
                     val = val * 10 + (b - '0');
                 else if (b == '.') {
-                     }
+                }
                 else if (b == '\n' || b == '\r')
                     break;
             }
